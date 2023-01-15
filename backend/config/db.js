@@ -1,0 +1,20 @@
+//Connection file to mongo db
+const mongoose = require("mongoose");
+const colors = require("colors");
+
+const connectDB = async () => {
+  try {
+    // ! add MONGO_URI to the .env file or directly here
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useCreateIndex: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+  } catch (error) {
+    console.error(`Error: ${error.message}`.red.bold);
+    process.exit();
+  }
+};
+
+module.exports = connectDB;
